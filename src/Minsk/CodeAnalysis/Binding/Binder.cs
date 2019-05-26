@@ -111,6 +111,12 @@ namespace Minsk.CodeAnalysis.Binding
             if (type != TypeSymbol.Void)
                 _diagnostics.XXX_ReportFunctionsAreUnsupported(syntax.Type.Span);
 
+            if (string.IsNullOrEmpty(syntax.Identifier.Text))
+            {
+                _diagnostics.ReportFunctionMissingIdentifier(syntax.Identifier.Span);
+                return;
+            }
+
             var function = new FunctionSymbol(syntax.Identifier.Text, parameters.ToImmutable(), type, syntax);
             if (!_scope.TryDeclareFunction(function))
                 _diagnostics.ReportSymbolAlreadyDeclared(syntax.Identifier.Span, function.Name);

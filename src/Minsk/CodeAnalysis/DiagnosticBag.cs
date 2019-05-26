@@ -123,6 +123,12 @@ namespace Minsk.CodeAnalysis
             Report(span, message);
         }
 
+        internal void ReportFunctionMissingIdentifier(TextSpan span)
+        {
+            var message = "Functions must have an Identifier.";
+            Report(span, message);
+        }
+
         public void ReportExpressionMustHaveValue(TextSpan span)
         {
             var message = "Expression must have a value.";
